@@ -1,39 +1,71 @@
 (function () {
+    
+    // Html elements
+    var speakBtn             = document.querySelector("#speakbt");
+    var resultSpeaker        = document.querySelector("#resultSpeak");
+    var jsonContainer        = document.querySelector("#jsonContainer");
 
+    // Config window talk
+    var windowSpeak = new SpeechSynthesisUtterance();
+    windowSpeak.lang = 'pt-BR';
+    windowSpeak.rate = 1.5;
 
-    var speakBtn = document.querySelector('#speakbt');
-    var resultSpeaker = document.querySelector('#resultSpeak');
-
+    // Check support at SpeechRecognition
     if (window.SpeechRecognition || window.webkitSpeechRecognition) {
 
+
+        // config Speech Recognition
         var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
-
         var myRecognition = new SpeechRecognition();
+            myRecognition.lang = 'pt-BR';
 
-        myRecognition.lang = 'pt-BR';
 
-
-        speakBtn.addEventListener('click', function () {
-
-            try {
-
+        // click button speak
+        speakBtn.addEventListener('click', function (){
+            try{
+                // Start Speech Recognition
                 myRecognition.start();
+                speakBtn.style.backgroundColor = "green";
+                resultSpeaker.innerHTML = "Olá, Estou te ouvindo!";
+                
+                // Window Speak
+                windowSpeak.text = "Olá, Estou te ouvindo!";
+                speechSynthesis.speak(windowSpeak);
 
-                resultSpeaker.innerHTML = "Estou te ouvindo!";
-
-            } catch (erro) {
-                alert('erro:' + erro.message);
+            }catch(erro){
+                alert('erro: ' + erro.message);
             }
-
         }, false);
 
+
+        // End Speach Recognition voice
         myRecognition.addEventListener('result', function (evt) {
 
             var resultSpeak = evt.results[0][0].transcript;
+            speakBtn.style.backgroundColor = "white";
+            resultSpeaker.innerHTML = resultSpeak;
+
+            // Window Speak
+            windowSpeak.text = resultSpeak;
+            speechSynthesis.speak(windowSpeak);
 
             console.log(resultSpeak);
 
-            resultSpeaker.innerHTML = resultSpeak;
+
+
+            /***************************** */
+            //                             //
+            //      Json generate          //
+            //                             //
+            /***************************** */
+
+            var arrayWorlds = resultSpeak.split(" ");
+            jsonContainer.innerHTML = JSON.stringify(arrayWorlds);
+
+
+
+
+
 
 
             // Realizar alguma operação de acordo com a fala
@@ -74,13 +106,23 @@
 
         }, false);
 
+
+
+
+
+
+
+
+
+
+
+
+        // erro
         myRecognition.addEventListener('error', function (evt) {
-
             resultSpeaker.innerHTML = 'Se você disse alguma coisa, não ouvi muito bem!';
-
         }, false);
 
-    } else {
+    }else{
         resultSpeaker.innerHTML = 'Seu navegador não suporta tanta tecnoligia!';
     }
 
