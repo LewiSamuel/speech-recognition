@@ -5,14 +5,38 @@
     var resultSpeaker        = document.querySelector("#resultSpeak");
     var jsonContainer        = document.querySelector("#jsonContainer");
 
-    // Config window talk
-    var windowSpeak = new SpeechSynthesisUtterance();
-    windowSpeak.lang = 'pt-BR';
-    windowSpeak.rate = 1.5;
+    /***********************************/
+    /*                                 */
+    //      TABELAS DE REFERENCIA      //
+    /*                                 */ 
+    /***********************************/
+
+    // Intencoes
+    var grupoIntencoes = ["capex", "obrigacao", "gog", "marcos_criticos"];
+
+    // Entidades
+    var grupoEntidades = ["cenario", "estrutura", "valor", "mes", "ano", "acumulado"];
+
+    // Dominios
+    var grupoDominiosCenario = ["previsto", "planejado", "planejamento", "realizado", "realização", "projetado", "projeção"];
+    var grupoDominiosEstrutura = ["cenpes", "pddp", "pdep", "pdrgn", "pdiso"];
+    var grupoDominiosValor = ["valor"];
+    var grupoDominiosMes = ["janeiro", "fevereiro", "marco", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"];
+    var grupoDominiosAno = [];
+    var grupoDominiosAcumulado = ["acumulado"];
+    var grupoDominiosAgencia = ["aneel", "anp"];
+    var grupoDominiosTipo_obrig = ["interna", "externa", "total"];
+    var grupoDominiosQuantidade = ["quantidade"];
+
+
 
     // Check support at SpeechRecognition
     if (window.SpeechRecognition || window.webkitSpeechRecognition) {
 
+        // Config window talk
+        var windowSpeak = new SpeechSynthesisUtterance();
+        windowSpeak.lang = 'pt-BR';
+        windowSpeak.rate = 1.5;
 
         // config Speech Recognition
         var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
@@ -59,8 +83,15 @@
             //                             //
             /***************************** */
 
-            var arrayWorlds = resultSpeak.split(" ");
-            jsonContainer.innerHTML = JSON.stringify(arrayWorlds);
+            var arrayWords = resultSpeak.split(" ");
+
+
+
+
+
+
+
+            jsonContainer.innerHTML = JSON.stringify({"audio": arrayWords});
 
 
 
