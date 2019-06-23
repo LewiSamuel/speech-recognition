@@ -241,16 +241,16 @@ function solve_macos_criticos(words){
 
             switch (intencao) {
                 case "capex":
-                    json['Aplicação'][intencao] = solve_capex(arrayWords);
+                    json['web_application'][intencao] = solve_capex(arrayWords);
                     break;
                 case "obrigação":
-                    json['Aplicação'][intencao] = solve_obrigacao(arrayWords);
+                    json['web_application'][intencao] = solve_obrigacao(arrayWords);
                     break;
                 case "gog":
-                    json['Aplicação'][intencao] = solve_gog(arrayWords);
+                    json['web_application'][intencao] = solve_gog(arrayWords);
                     break;
                 case "marcos críticos":
-                    json['Aplicação'][intencao] = solve_macos_criticos(arrayWords);
+                    json['web_application'][intencao] = solve_macos_criticos(arrayWords);
                     break;
                 default:
                     break;
