@@ -221,7 +221,7 @@ function solve_macos_criticos(words){
             //         break;
             //     }
             resultSpeak = resultSpeak.toLowerCase();
-            resultSpeaker.innerHTML = resultSpeak.replace('apex','capex').replace('capas','capex').replace('capacetes','capex').replace('george','gog').replace('google','gog').replace('blog','gog');
+            resultSpeaker.innerHTML = resultSpeak.replace(' apex',' capex').replace('capas','capex').replace('capacetes','capex').replace('george','gog').replace('google','gog').replace('blog','gog');
 
             // Janela de conversa
             windowSpeak.text = resultSpeak;
