@@ -191,7 +191,9 @@ function solve_macos_criticos(words){
             try{
                 // Start Speech Recognition
                 myRecognition.start();
-                speakBtn.style.backgroundColor = "green";
+                // speakBtn.style.backgroundColor = "green";
+                $(".btnSpeak").css("background-position","right");
+                $(".btnSpeak").html("Gravando...");
                 resultSpeaker.innerHTML = "Olá, Estou te ouvindo!";
                 
                 // Window Speak
@@ -208,7 +210,9 @@ function solve_macos_criticos(words){
         myRecognition.addEventListener('result', function (evt) {
 
             var resultSpeak = evt.results[0][0].transcript;
-            speakBtn.style.backgroundColor = "white";
+            // speakBtn.style.backgroundColor = "white";
+            $(".btnSpeak").css("background-position","left");
+            $(".btnSpeak").html("Gravar");
             resultSpeaker.innerHTML = resultSpeak;
 
             // Window Speak
