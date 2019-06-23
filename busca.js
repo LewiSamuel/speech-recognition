@@ -1,5 +1,12 @@
-var grupoDominiosCenario = ["previsto", "planejado", "planejamento", "realizado", "realização", "projetado", "projeção", "prevista", "planejada", "realizada", "projetada"];
-
+var grupoDominiosCenario = ["previsto", "planejado", "planejamento", "realizado", "realização", "projetado", "projeção", "atrasado", "atraso", "prevista", "planejada", "realizada", "projetada", "atrasada", "previstos", "planejados", "planejamentos", "realizados", "projetados", "atrasados", "atrasos", "previstas", "planejadas", "realizadas", "projetadas", "atrasadas"];
+var grupoDominiosEstrutura = ["cenpes", "pddp", "pdep", "pdrgn", "pdiso"];
+var grupoDominiosValor = ["valor"];
+var grupoDominiosMes = ["janeiro", "fevereiro", "marco", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"];
+var grupoDominiosAno = [];
+var grupoDominiosAcumulado = ["acumulado", "acumulada", "acumulados", "acumuladas"];
+var grupoDominiosAgencia = ["aneel", "anp"];
+var grupoDominiosTipo_obrig = ["interno", "externo", "internamente", "externamente", "total", "interna", "externa", "internos", "externos", "internas", "externas"];
+var grupoDominiosQuantidade = ["quantidade", "quantidades"];
 
 function solve_capex(words){
     
