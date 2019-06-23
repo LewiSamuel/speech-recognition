@@ -36,8 +36,8 @@ function solve_capex(words){
     words.forEach(element => {
         if(element in hashTable)
             saida[hashTable[element]] = element;
-        else if (isNumeric(element))
-            saida[ano] = toString(element);
+        else if (isNaN(element) === false)
+            saida['ano'] = element;
     });
 
     return saida;
@@ -75,8 +75,8 @@ function solve_obrigacao(words){
     words.forEach(element => {
         if(element in hashTable)
             saida[hashTable[element]] = element;
-        else if (isNumeric(element))
-            saida[ano] = toString(element);
+        else if (isNaN(element) === false)
+            saida['ano'] = element;
     });
 
     return saida;
@@ -110,8 +110,8 @@ function solve_gog(words){
     words.forEach(element => {
         if(element in hashTable)
             saida[hashTable[element]] = element;
-        else if (isNumeric(element))
-            saida[ano] = toString(element);
+        else if (isNaN(element) === false)
+            saida['ano'] = element;
     });
 
     return saida;
@@ -145,8 +145,8 @@ function solve_macos_criticos(words){
     words.forEach(element => {
         if(element in hashTable)
             saida[hashTable[element]] = element;
-        else if (isNumeric(element))
-            saida[ano] = toString(element);
+        else if (isNaN(element) === false)
+            saida['ano'] = element;
     });
 
     return saida;
@@ -227,57 +227,39 @@ function solve_macos_criticos(words){
 
             //TODO : Identificar marcos criticos
             //TODO : Aproximação da palavra 
-            //TODO : Palavras com ~ e ´
 
             var arrayWords = resultSpeak.split(" ");
 
-            var grupoIntencoes = ["capex", "obrigacao", "gog", "marcos_criticos"];
+            var grupoIntencoes = {"capex":1, "obrigação":1, "gog":1, "marcos_criticos":1};
             var intencao
-            var json
+            var json = {}
+            json['Aplicação'] = {}
             arrayWords.forEach(element =>{
                 if(element in grupoIntencoes){
                     intencao  = element
-                    break;
                 }
             })
 
+            console.log('in = ' + intencao)
             switch (intencao) {
                 case "capex":
-                    json = solve_capex(arrayWords);
+                    json['Aplicação'][intencao] = solve_capex(arrayWords);
                     break;
-                case "obrigacao":
-                    json = solve_obrigacao(arrayWords);
+                case "obrigação":
+                    json['Aplicação'][intencao] = solve_obrigacao(arrayWords);
                     break;
                 case "gog":
-                    json = solve_gog(arrayWords);
+                    json['Aplicação'][intencao] = solve_gog(arrayWords);
                     break;
                 case "marcos_criticos":
-                    json = solve_macos_criticos(arrayWords);
+                    json['Aplicação'][intencao] = solve_macos_criticos(arrayWords);
                     break;
                 default:
                     break;
             }
-            
+            console.log(json)
             jsonContainer.innerHTML = JSON.stringify(json);
 
-            // Realizar alguma operação de acordo com a fala
-            switch (resultSpeak.toLowerCase()) {
-                case 'azul':
-                    document.body.style.backgroundColor = '#0000FF';    
-                    break;
-                case 'rosa':
-                    document.body.style.backgroundColor = '#FF1493';    
-                    break;
-                case 'laranja':
-                    document.body.style.backgroundColor = '#FF4500';    
-                    break;
-                case 'vermelho':
-                    document.body.style.backgroundColor = '#FF0000';    
-                    break;
-                case 'verde':
-                    document.body.style.backgroundColor = 'GREEN';    
-                    break;
-            }
 
             if (resultSpeak.match(/color/)) {
                 var resultado = resultSpeak.split('color');
