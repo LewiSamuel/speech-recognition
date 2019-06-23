@@ -6,11 +6,7 @@ function solve_capex(words){
     var hashTable = {}
     var saida = {}
 
-    grupoDominiosCenario_M.forEach(element => {
-        hashTable[element] = 'cenario'
-    });
-
-    grupoDominiosCenario_F.forEach(element => {
+    grupoDominiosCenario.forEach(element => {
         hashTable[element] = 'cenario'
     });
 
@@ -45,11 +41,7 @@ function solve_obrigacao(words){
     var hashTable = {}
     var saida = {}
 
-    grupoDominiosCenario_M.forEach(element => {
-        hashTable[element] = 'cenario'
-    });
-
-    grupoDominiosCenario_F.forEach(element => {
+    grupoDominiosCenario.forEach(element => {
         hashTable[element] = 'cenario'
     });
 
@@ -88,11 +80,7 @@ function solve_gog(words){
     var hashTable = {}
     var saida = {}
 
-    grupoDominiosCenario_M.forEach(element => {
-        hashTable[element] = 'cenario'
-    });
-
-    grupoDominiosCenario_F.forEach(element => {
+    grupoDominiosCenario.forEach(element => {
         hashTable[element] = 'cenario'
     });
 
