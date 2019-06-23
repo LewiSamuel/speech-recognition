@@ -2,7 +2,6 @@ var grupoDominiosCenario = ["previsto", "planejado", "planejamento", "realizado"
 var grupoDominiosEstrutura = ["cenpes", "pddp", "pdep", "pdrgn", "pdiso"];
 var grupoDominiosValor = ["valor"];
 var grupoDominiosMes = ["janeiro", "fevereiro", "marco", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"];
-var grupoDominiosAno = [];
 var grupoDominiosAcumulado = ["acumulado", "acumulada", "acumulados", "acumuladas"];
 var grupoDominiosAgencia = ["aneel", "anp"];
 var grupoDominiosTipo_obrig = ["interno", "externo", "internamente", "externamente", "total", "interna", "externa", "internos", "externos", "internas", "externas"];
@@ -164,50 +163,35 @@ function solve_macos_criticos(words){
         console.log(err)
     });
 
-
     // Elementos do HTML
     var speakBtn             = document.querySelector("#speakbt");
     var resultSpeaker        = document.querySelector("#resultSpeak");
     var jsonContainer        = document.querySelector("#jsonContainer");
 
-    /***********************************/
-    /*                                 */
-    //      TABELAS DE REFERENCIA      //
-    /*                                 */ 
-    /***********************************/
-
-    // Intencoes
-
-
-
-
-
-
-    // Check support at SpeechRecognition
+    // Verifica se o navegador tem suporte para a aplicação
     if (window.SpeechRecognition || window.webkitSpeechRecognition) {
 
-        // Config window talk
+        // Configurando janela de conversa
         var windowSpeak = new SpeechSynthesisUtterance();
         windowSpeak.lang = 'pt-BR';
         windowSpeak.rate = 1.5;
 
-        // config Speech Recognition
+        // Configurando o reconhecimento de voz
         var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
         var myRecognition = new SpeechRecognition();
             myRecognition.lang = 'pt-BR';
 
 
-        // click button speak
+        // Botão para falar
         speakBtn.addEventListener('click', function (){
             try{
-                // Start Speech Recognition
+                // Começa a escutar
                 myRecognition.start();
-                // speakBtn.style.backgroundColor = "green";
                 $(".btnSpeak").css("background-position","right");
                 $(".btnSpeak").html("Gravando...");
                 resultSpeaker.innerHTML = "Olá, Estou te ouvindo!";
                 
-                // Window Speak
+                //Janela de escuta
                 windowSpeak.text = "Olá, Estou te ouvindo!";
                 speechSynthesis.speak(windowSpeak);
 
@@ -217,45 +201,44 @@ function solve_macos_criticos(words){
         }, false);
 
 
-        // End Speach Recognition voice
+        // Termina o reconhecimento de voz
         myRecognition.addEventListener('result', function (evt) {
 
             var resultSpeak = evt.results[0][0].transcript;
-            // speakBtn.style.backgroundColor = "white";
+
             $(".btnSpeak").css("background-position","left");
             $(".btnSpeak").html("Gravar");
+           
+            // Escreve o que foi dito
             resultSpeaker.innerHTML = resultSpeak;
 
-            // Window Speak
+            // Janela de conversa
             windowSpeak.text = resultSpeak;
             speechSynthesis.speak(windowSpeak);
+            // Padroniza tudo para lower case
+            resultSpeak = resultSpeak.toLowerCase()
 
-            console.log(resultSpeak);
-
-
-
-            /***************************** */
-            //                             //
-            //      Json generate          //
-            //                             //
-            /***************************** */
-
-            //TODO : Identificar marcos criticos
-            //TODO : Aproximação da palavra 
-
+            // Quebra em um array de palavras ditas
             var arrayWords = resultSpeak.split(" ");
 
-            var grupoIntencoes = {"capex":1, "obrigação":1, "gog":1, "marcos_criticos":1};
+            var grupoIntencoes = {"capex":1, "obrigação":1, "gog":1, "marcos críticos":1};
             var intencao
             var json = {}
             json['Aplicação'] = {}
-            arrayWords.forEach(element =>{
+            for(var i = 0; i < arrayWords.length; i++){
+                var element = arrayWords[i];
+                var element2 = arrayWords[i] + ' ' + arrayWords[i+1];
+                console.log(element2)
                 if(element in grupoIntencoes){
                     intencao  = element
+                    break;
                 }
-            })
+                if(element2 in grupoIntencoes){
+                    intencao  = element2
+                    break;
+                }
+            }
 
-            console.log('in = ' + intencao)
             switch (intencao) {
                 case "capex":
                     json['Aplicação'][intencao] = solve_capex(arrayWords);
@@ -266,45 +249,16 @@ function solve_macos_criticos(words){
                 case "gog":
                     json['Aplicação'][intencao] = solve_gog(arrayWords);
                     break;
-                case "marcos_criticos":
+                case "marcos críticos":
                     json['Aplicação'][intencao] = solve_macos_criticos(arrayWords);
                     break;
                 default:
                     break;
             }
-            console.log(json)
+            
             jsonContainer.innerHTML = JSON.stringify(json);
 
-
-            if (resultSpeak.match(/color/)) {
-                var resultado = resultSpeak.split('color');
-                document.body.style.backgroundColor = resultado[1];    
-            }
-
-            if (resultSpeak.match(/buscar por/)) {
-
-                resultSpeaker.innerHTML = 'Redirecionando...';
-                
-                setTimeout(function(){
-                    
-                    var resultado = resultSpeak.split('buscar por');
-                    window.location.href = 'https://www.google.com.br/search?q=' + resultado[1];
-                    
-                },2000);
-            }
-
         }, false);
-
-
-
-
-
-
-
-
-
-
-
 
         // erro
         myRecognition.addEventListener('error', function (evt) {
