@@ -1,6 +1,160 @@
+var grupoDominiosCenario = ["previsto", "planejado", "planejamento", "realizado", "realização", "projetado", "projeção", "atrasado", "atraso", "prevista", "planejada", "realizada", "projetada", "atrasada", "previstos", "planejados", "planejamentos", "realizados", "projetados", "atrasados", "atrasos", "previstas", "planejadas", "realizadas", "projetadas", "atrasadas"];
+var grupoDominiosEstrutura = ["cenpes", "pddp", "pdep", "pdrgn", "pdiso"];
+var grupoDominiosValor = ["valor"];
+var grupoDominiosMes = ["janeiro", "fevereiro", "marco", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"];
+var grupoDominiosAno = [];
+var grupoDominiosAcumulado = ["acumulado", "acumulada", "acumulados", "acumuladas"];
+var grupoDominiosAgencia = ["aneel", "anp"];
+var grupoDominiosTipo_obrig = ["interno", "externo", "internamente", "externamente", "total", "interna", "externa", "internos", "externos", "internas", "externas"];
+var grupoDominiosQuantidade = ["quantidade", "quantidades"];
+
+function solve_capex(words){
+    
+    var hashTable = {}
+    var saida = {}
+
+    grupoDominiosCenario.forEach(element => {
+        hashTable[element] = 'cenario'
+    });
+
+    grupoDominiosEstrutura.forEach(element => {
+        hashTable[element] = 'estrutura'
+    });
+
+    grupoDominiosValor.forEach(element => {
+        hashTable[element] = 'valor'
+    });
+
+    grupoDominiosMes.forEach(element => {
+        hashTable[element] = 'mes'
+    });
+
+    grupoDominiosAcumulado.forEach(element => {
+        hashTable[element] = 'acumulado'
+    });
+
+    words.forEach(element => {
+        if(element in hashTable)
+            saida[hashTable[element]] = element;
+        else if (isNumeric(element))
+            saida[ano] = toString(element);
+    });
+
+    return saida;
+}
+
+function solve_obrigacao(words){
+
+    var hashTable = {}
+    var saida = {}
+
+    grupoDominiosCenario.forEach(element => {
+        hashTable[element] = 'cenario'
+    });
+
+    grupoDominiosValor.forEach(element => {
+        hashTable[element] = 'valor'
+    });
+
+    grupoDominiosAgencia.forEach(element => {
+        hashTable[element] = 'agencia'
+    });
+
+    grupoDominiosTipo_obrig.forEach(element => {
+        hashTable[element] = 'tipo_obrig'
+    });
+
+    grupoDominiosMes.forEach(element => {
+        hashTable[element] = 'mes'
+    });
+
+    grupoDominiosAcumulado.forEach(element => {
+        hashTable[element] = 'acumulado'
+    });
+
+    words.forEach(element => {
+        if(element in hashTable)
+            saida[hashTable[element]] = element;
+        else if (isNumeric(element))
+            saida[ano] = toString(element);
+    });
+
+    return saida;
+}
+
+function solve_gog(words){
+    
+    var hashTable = {}
+    var saida = {}
+
+    grupoDominiosCenario.forEach(element => {
+        hashTable[element] = 'cenario'
+    });
+
+    grupoDominiosEstrutura.forEach(element => {
+        hashTable[element] = 'estrutura'
+    });
+
+    grupoDominiosValor.forEach(element => {
+        hashTable[element] = 'valor'
+    });
+
+    grupoDominiosMes.forEach(element => {
+        hashTable[element] = 'mes'
+    });
+
+    grupoDominiosAcumulado.forEach(element => {
+        hashTable[element] = 'acumulado'
+    });
+
+    words.forEach(element => {
+        if(element in hashTable)
+            saida[hashTable[element]] = element;
+        else if (isNumeric(element))
+            saida[ano] = toString(element);
+    });
+
+    return saida;
+}
+
+function solve_macos_criticos(words){
+    
+    var hashTable = {}
+    var saida = {}
+
+    grupoDominiosCenario.forEach(element => {
+        hashTable[element] = 'cenario'
+    });
+
+    grupoDominiosEstrutura.forEach(element => {
+        hashTable[element] = 'estrutura'
+    });
+
+    grupoDominiosQuantidade.forEach(element => {
+        hashTable[element] = 'quantidade'
+    });
+
+    grupoDominiosMes.forEach(element => {
+        hashTable[element] = 'mes'
+    });
+
+    grupoDominiosAcumulado.forEach(element => {
+        hashTable[element] = 'acumulado'
+    });
+
+    words.forEach(element => {
+        if(element in hashTable)
+            saida[hashTable[element]] = element;
+        else if (isNumeric(element))
+            saida[ano] = toString(element);
+    });
+
+    return saida;
+}
+
 (function () {
     
-    // Html elements
+    // Elementos do HTML
     var speakBtn             = document.querySelector("#speakbt");
     var resultSpeaker        = document.querySelector("#resultSpeak");
     var jsonContainer        = document.querySelector("#jsonContainer");
@@ -12,26 +166,9 @@
     /***********************************/
 
     // Intencoes
-    var grupoIntencoes = ["capex", "obrigacao", "gog", "marcos_criticos"];
 
-    // Entidades
-    var grupoEntidades = ["cenario", "estrutura", "valor", "mes", "ano", "acumulado"];
 
-    // Dominios
-    var grupoDominiosCenario = ["previsto", "planejado", "planejamento", "realizado", "realização", "projetado", "projeção"];
-    var grupoDominiosEstrutura = ["cenpes", "pddp", "pdep", "pdrgn", "pdiso"];
-    var grupoDominiosValor = ["valor"];
-    var grupoDominiosMes = ["janeiro", "fevereiro", "marco", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"];
-    var grupoDominiosAno = [];
-    var grupoDominiosAcumulado = ["acumulado"];
-    var grupoDominiosAgencia = ["aneel", "anp"];
-    var grupoDominiosTipo_obrig = ["interna", "externa", "total"];
-    var grupoDominiosQuantidade = ["quantidade"];
 
-    // Grupos de itens encontrados
-    var grupoIntencoesEncontradas = [];
-    var grupoEntidadesEncontradas = [];
-    var grupoDominiosEncontrados  = [];
 
 
 
@@ -88,21 +225,40 @@
             //                             //
             /***************************** */
 
+            //TODO : Identificar marcos criticos
+            //TODO : Aproximação da palavra 
+            //TODO : Palavras com ~ e ´
+
             var arrayWords = resultSpeak.split(" ");
 
-            // Procurando Intencoes
+            var grupoIntencoes = ["capex", "obrigacao", "gog", "marcos_criticos"];
+            var intencao
+            var json
+            arrayWords.forEach(element =>{
+                if(element in grupoIntencoes){
+                    intencao  = element
+                    break;
+                }
+            })
+
+            switch (intencao) {
+                case "capex":
+                    json = solve_capex(arrayWords);
+                    break;
+                case "obrigacao":
+                    json = solve_obrigacao(arrayWords);
+                    break;
+                case "gog":
+                    json = solve_gog(arrayWords);
+                    break;
+                case "marcos_criticos":
+                    json = solve_macos_criticos(arrayWords);
+                    break;
+                default:
+                    break;
+            }
             
-
-            var grupoIntencoesEncontradas
-            var grupoEntidadesEncontradas
-            var grupoDominiosEncontrados 
-
-
-
-            jsonContainer.innerHTML = JSON.stringify({"audio": arrayWords});
-
-
-
+            jsonContainer.innerHTML = JSON.stringify(json);
 
             // Realizar alguma operação de acordo com a fala
             switch (resultSpeak.toLowerCase()) {
