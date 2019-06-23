@@ -224,7 +224,7 @@ function solve_macos_criticos(words){
             var grupoIntencoes = {"capex":1, "obrigação":1, "gog":1, "marcos críticos":1};
             var intencao
             var json = {}
-            json['Aplicação'] = {}
+            json['web_application'] = {}
             for(var i = 0; i < arrayWords.length; i++){
                 var element = arrayWords[i];
                 var element2 = arrayWords[i] + ' ' + arrayWords[i+1];
