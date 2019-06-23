@@ -210,13 +210,24 @@ function solve_macos_criticos(words){
             $(".btnSpeak").html("Gravar");
            
             // Escreve o que foi dito
-            resultSpeaker.innerHTML = resultSpeak;
+            // if(element == "capas" 
+            //     || element == "capacetes"){
+            //         intencao = "capex";
+            //         break;
+            //     }
+            //     if(element == "google"
+            //     || element == "george"){
+            //         intencao = "gog";
+            //         break;
+            //     }
+            resultSpeak = resultSpeak.toLowerCase();
+            resultSpeaker.innerHTML = resultSpeak.replace('apex','capex').replace('capas','capex').replace('capacetes','capex').replace('george','gog').replace('google','gog').replace('blog','gog');
 
             // Janela de conversa
             windowSpeak.text = resultSpeak;
             speechSynthesis.speak(windowSpeak);
             // Padroniza tudo para lower case
-            resultSpeak = resultSpeak.toLowerCase()
+            
 
             // Quebra em um array de palavras ditas
             var arrayWords = resultSpeak.split(" ");
@@ -235,6 +246,18 @@ function solve_macos_criticos(words){
                 }
                 if(element2 in grupoIntencoes){
                     intencao  = element2
+                    break;
+                }
+                if(element == "capas" || element2 == "capas"
+                || element == "capacetes" || element2 == "capacetes"
+                || element == "apex" || element2 == "apex"){
+                    intencao = "capex";
+                    break;
+                }
+                if(element == "google" || element2 == "google"
+                || element == "george" || element2 == "george"
+                || element == "blog" || element2 == "blog"){
+                    intencao = "gog";
                     break;
                 }
             }
