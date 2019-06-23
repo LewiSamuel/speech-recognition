@@ -154,6 +154,17 @@ function solve_macos_criticos(words){
 
 (function () {
     
+
+    navigator
+    .mediaDevices
+    .getUserMedia({audio: true})
+    .then( stream => {
+        console.log(stream)
+    }, err =>{
+        console.log(err)
+    });
+
+
     // Elementos do HTML
     var speakBtn             = document.querySelector("#speakbt");
     var resultSpeaker        = document.querySelector("#resultSpeak");
