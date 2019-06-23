@@ -28,6 +28,11 @@
     var grupoDominiosTipo_obrig = ["interna", "externa", "total"];
     var grupoDominiosQuantidade = ["quantidade"];
 
+    // Grupos de itens encontrados
+    var grupoIntencoesEncontradas = [];
+    var grupoEntidadesEncontradas = [];
+    var grupoDominiosEncontrados  = [];
+
 
 
     // Check support at SpeechRecognition
@@ -85,16 +90,16 @@
 
             var arrayWords = resultSpeak.split(" ");
 
+            // Procurando Intencoes
+            
 
-
-
+            var grupoIntencoesEncontradas
+            var grupoEntidadesEncontradas
+            var grupoDominiosEncontrados 
 
 
 
             jsonContainer.innerHTML = JSON.stringify({"audio": arrayWords});
-
-
-
 
 
 
