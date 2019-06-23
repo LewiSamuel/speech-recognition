@@ -309,6 +309,8 @@ function solve_macos_criticos(words){
         // erro
         myRecognition.addEventListener('error', function (evt) {
             resultSpeaker.innerHTML = 'Se você disse alguma coisa, não ouvi muito bem!';
+            $(".btnSpeak").css("background-position","left");
+            $(".btnSpeak").html("Gravar");
         }, false);
 
     }else{
